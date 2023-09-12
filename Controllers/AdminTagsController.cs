@@ -7,11 +7,11 @@ namespace Blog.Web.Controllers
 {
     public class AdminTagsController : Controller
     {
-        private readonly BlogDbContext blogDbContext;
+        private readonly BlogDbContext _blogDbContext;
 
         public AdminTagsController(BlogDbContext blogDbContext)
         {
-            this.blogDbContext = blogDbContext;
+            this._blogDbContext = blogDbContext;
         }
 
         [HttpGet]
@@ -32,10 +32,20 @@ namespace Blog.Web.Controllers
 
             };
 
-            blogDbContext.Tags.Add(tag);
-            blogDbContext.SaveChanges();
+            _blogDbContext.Tags.Add(tag);
+            _blogDbContext.SaveChanges();
 
-            return View("Add");
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        [ActionName("List")]
+        public IActionResult List()
+        {
+            //use Bdcontext to read the tags
+            var tags = _blogDbContext.Tags.ToList();
+            
+            return View(tags);
         }
     }
 }
