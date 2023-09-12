@@ -94,5 +94,19 @@ namespace Blog.Web.Controllers
             //Show error notification
             return RedirectToAction("Edit", new { id = editTagRequest.Id });
         }
+        [HttpPost]
+        public IActionResult Delete(EditTagRequest editTagRequest)
+        {
+            var tag = _blogDbContext.Tags.Find(editTagRequest.Id);
+            if (tag != null)
+            {
+                _blogDbContext.Tags.Remove(tag);
+                _blogDbContext.SaveChanges();
+
+                return RedirectToAction("List");
+            }
+
+            return RedirectToAction("Edit", new { id = editTagRequest.Id });
+        }
     }
 }
