@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-﻿Claro, aqui está um exemplo de um arquivo `README.md` para o seu projeto ASP.NET MVC:
-=======
-Claro, aqui está um exemplo de um arquivo `README.md` para o seu projeto ASP.NET MVC:
->>>>>>> e6e0e345c61f85bc47e8e8379995cd8b637b3d83
-
 # Blog ASP.NET MVC
 
 Este é um projeto de blog desenvolvido como parte do curso "ASP.NET MVC: Complete Practical Guide (.NET 7)" para criação de uma plataforma de blog onde administradores podem adicionar novos posts marcados com tags, e usuários comuns podem acessar, se cadastrar, dar like e comentar nos posts.
@@ -22,13 +16,9 @@ Antes de começar a trabalhar neste projeto, certifique-se de ter os seguintes p
 1. Clone este repositório em sua máquina local:
 
    ```
-<<<<<<< HEAD
-   git clone git@github.com:freireguilherme/blogProject.git
-=======
-   git clone https://github.com/seu-usuario/blog-aspnet-mvc.git
->>>>>>> e6e0e345c61f85bc47e8e8379995cd8b637b3d83
-   ```
 
+   git clone git@github.com:freireguilherme/blogProject.git
+   ```
 2. Abra o projeto no Visual Studio (ou Visual Studio Code) e certifique-se de que todas as dependências foram restauradas.
 
 3. Configure a conexão com o banco de dados em `appsettings.json`:
