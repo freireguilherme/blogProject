@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿Claro, aqui está um exemplo de um arquivo `README.md` para o seu projeto ASP.NET MVC:
+=======
+Claro, aqui está um exemplo de um arquivo `README.md` para o seu projeto ASP.NET MVC:
+>>>>>>> e6e0e345c61f85bc47e8e8379995cd8b637b3d83
 
 # Blog ASP.NET MVC
 
@@ -18,7 +22,11 @@ Antes de começar a trabalhar neste projeto, certifique-se de ter os seguintes p
 1. Clone este repositório em sua máquina local:
 
    ```
+<<<<<<< HEAD
    git clone git@github.com:freireguilherme/blogProject.git
+=======
+   git clone https://github.com/seu-usuario/blog-aspnet-mvc.git
+>>>>>>> e6e0e345c61f85bc47e8e8379995cd8b637b3d83
    ```
 
 2. Abra o projeto no Visual Studio (ou Visual Studio Code) e certifique-se de que todas as dependências foram restauradas.
@@ -82,4 +90,8 @@ Este projeto está sob a licença [MIT](LICENSE).
 
 ---
 
+<<<<<<< HEAD
 Este é um projeto de exemplo e você pode personalizá-lo de acordo com suas necessidades e requisitos específicos. Certifique-se de seguir as melhores práticas de segurança ao lidar com autenticação e autorização de usuários. Boa sorte com o desenvolvimento do seu blog ASP.NET MVC!
+=======
+Este é um projeto de exemplo e você pode personalizá-lo de acordo com suas necessidades e requisitos específicos. Certifique-se de seguir as melhores práticas de segurança ao lidar com autenticação e autorização de usuários. Boa sorte com o desenvolvimento do seu blog ASP.NET MVC!
+>>>>>>> e6e0e345c61f85bc47e8e8379995cd8b637b3d83
