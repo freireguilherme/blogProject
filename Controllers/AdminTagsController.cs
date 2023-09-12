@@ -22,7 +22,7 @@ namespace Blog.Web.Controllers
 
         [HttpPost]
         [ActionName("Add")]
-        public IActionResult SubmitTag(AddTagRequest addTagRequest)
+        public IActionResult Add(AddTagRequest addTagRequest)
         {
             // mapping AddTagRequest to Tag domain model
             var tag = new Tag
@@ -46,6 +46,53 @@ namespace Blog.Web.Controllers
             var tags = _blogDbContext.Tags.ToList();
             
             return View(tags);
+        }
+
+        [HttpGet]
+        [ActionName("Edit")]
+        public IActionResult Edit(Guid id)
+        {
+            //var tag = _blogDbContext.Tags.Find(id);
+            var tag = _blogDbContext.Tags.FirstOrDefault(x => x.Id == id);
+            if (tag != null)
+            {
+                var editTagRequest = new EditTagRequest
+                {
+                    Id = tag.Id,
+                    Name = tag.Name,
+                    DisplayName = tag.DisplayName
+                };
+            return View(editTagRequest);
+            }
+
+            return View(null);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditTagRequest editTagRequest)
+        {
+            var tag = new Tag
+            {
+                Id = editTagRequest.Id,
+                Name = editTagRequest.Name,
+                DisplayName = editTagRequest.DisplayName
+            };
+
+            var existingTag = _blogDbContext.Tags.Find(tag.Id);
+            
+            if (existingTag != null)
+            {
+                existingTag.Name = tag.Name;
+                existingTag.DisplayName = tag.DisplayName;
+                
+                //saving changes
+                _blogDbContext.SaveChanges();
+                
+                //Show success notification
+                return RedirectToAction("List");
+            }
+            //Show error notification
+            return RedirectToAction("Edit", new { id = editTagRequest.Id });
         }
     }
 }
