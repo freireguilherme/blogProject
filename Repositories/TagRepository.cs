@@ -1,32 +1,62 @@
-﻿using Blog.Web.Models.Domain;
+﻿using Blog.Web.Data;
+using Blog.Web.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web.Repositories
 {
-    public class TagRepository : ITagInterface
+    public class TagRepository : ITagRepository
     {
-        public Task<Tag> AddAsync(Tag tag)
+        private readonly BlogDbContext _blogDbContext;
+
+        public TagRepository(BlogDbContext blogDbContext)
         {
-            throw new NotImplementedException();
+            _blogDbContext = blogDbContext;
+        }
+        public async Task<Tag> AddAsync(Tag tag)
+        {
+            await _blogDbContext.Tags.AddAsync(tag);
+            await _blogDbContext.SaveChangesAsync();
+
+            return tag;
         }
 
-        public Task<Tag?> DeleteAsync(Guid id)
+        public async Task<Tag?> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existingTag = await _blogDbContext.Tags.FindAsync(id);
+            if (existingTag != null)
+            {
+                _blogDbContext.Tags.Remove(existingTag);
+                await _blogDbContext.SaveChangesAsync();
+                return existingTag;
+            }
+
+            return null;
         }
 
-        public Task<IEnumerable<Tag>> GetAllAsync()
+        public async Task<IEnumerable<Tag>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _blogDbContext.Tags.ToListAsync();
         }
 
-        public Task<Tag?> GetAsync(Guid id)
+        public async Task<Tag?> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _blogDbContext.Tags.FirstOrDefaultAsync(x=> x.Id == id);
         }
 
-        public Task<Tag?> UpdateAsync(Tag tag)
+        public async Task<Tag?> UpdateAsync(Tag tag)
         {
-            throw new NotImplementedException();
+            var existingTag = await _blogDbContext.Tags.FindAsync(tag.Id);
+            if (existingTag != null)
+            {
+                existingTag.Name = tag.Name;
+                existingTag.DisplayName = tag.DisplayName;
+
+                await _blogDbContext.SaveChangesAsync();
+
+                return existingTag;
+            }
+
+            return null;
         }
     }
 }
