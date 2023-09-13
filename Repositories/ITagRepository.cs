@@ -2,7 +2,7 @@
 
 namespace Blog.Web.Repositories
 {
-    public interface ITagInterface
+    public interface ITagRepository
     {
         Task <IEnumerable<Tag>> GetAllAsync();
         Task<Tag?> GetAsync(Guid id);
