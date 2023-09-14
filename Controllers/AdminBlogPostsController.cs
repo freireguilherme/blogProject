@@ -155,4 +155,20 @@ public class AdminBlogPostsController : Controller
         //Show an error notification
         return RedirectToAction("Edit");
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> Delete(EditBlogPostRequest editBlogPostRequest)
+    {
+        //talk to repository to delete this blog and tags
+        var deletedBlogPost = await _blogPostRepository.DeleteAsync(editBlogPostRequest.Id);
+
+        if (deletedBlogPost != null)
+        {
+            //Show success notification
+            return RedirectToAction("List");
+        }
+        // Show error notification
+        return RedirectToAction("Edit", new { id = editBlogPostRequest.Id });
+        
+    }
 }
