@@ -108,4 +108,51 @@ public class AdminBlogPostsController : Controller
         return View(null);
     }
     
+    [HttpPost]
+    public async Task<IActionResult> Edit(EditBlogPostRequest editBlogPostRequest)
+    {
+        //map view model back to domain model
+        var blogPostDomainModel = new BlogPost
+        {
+            Id = editBlogPostRequest.Id,
+            Heading = editBlogPostRequest.Heading,
+            PageTitle = editBlogPostRequest.PageTitle,
+            Content = editBlogPostRequest.Content,
+            ShortDescription = editBlogPostRequest.ShortDescription,
+            FeaturedImageUrl = editBlogPostRequest.FeaturedImageUrl,
+            UrlHandle = editBlogPostRequest.UrlHandle,
+            PublishedDate = editBlogPostRequest.PublishedDate,
+            Author = editBlogPostRequest.Author,
+            Visible = editBlogPostRequest.Visible,
+
+        };
+        //map tags into domain model
+        var selectTags = new List<Tag>();
+        foreach (var selectedTag in editBlogPostRequest.SelectedTags)
+        {
+            if (Guid.TryParse(selectedTag, out var tag))
+            {
+                var foundTag = await _tagRepository.GetAsync(tag);
+
+                if (foundTag != null)
+                {
+                    selectTags.Add(foundTag);
+                }
+            }
+        }
+
+        blogPostDomainModel.Tags = selectTags;
+        
+        //Submit information to repository to update
+        var updatedBlog = await _blogPostRepository.UpdateAsync(blogPostDomainModel);
+
+        if (updatedBlog != null)
+        {
+            //Show success notification
+            return RedirectToAction("Edit");
+        }
+        
+        //Show an error notification
+        return RedirectToAction("Edit");
+    }
 }
