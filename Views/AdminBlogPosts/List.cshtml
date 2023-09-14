@@ -9,17 +9,19 @@
 </div>
 
 <div class="container py-5">
-    <table class="table">
-        <thead>
+    @if(@Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
             <tr>
                 <td>Id</td>
                 <td>Heading</td>
                 <td>Tags</td>
                 <td>Actions</td>
             </tr>
-        </thead>
-        
-        <tbody>
+            </thead>
+
+            <tbody>
             @foreach (var blogPost in Model)
             {
                 <tr>
@@ -38,10 +40,16 @@
                            asp-controller="AdminBlogPosts"
                            asp-action="Edit"
                            asp-route-id="@blogPost.Id">
-                        Edit</a>
+                            Edit</a>
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
+            </tbody>
+        </table>    
+    }
+    else
+    {
+        <p>No Blog Posts found!</p>
+    }
+    
 </div>
