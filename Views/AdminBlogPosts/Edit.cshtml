@@ -38,6 +38,19 @@
             </div>
             
             <div class="mb-3">
+                <label class="form-label">Featured Image Upload</label>
+                <input type="file" id="featuredImageUpload" class="form-control me-1"/>
+                @if(Model.FeaturedImageUrl != null)
+                {
+                    <img src="@Model.FeaturedImageUrl" id="featuredImageDisplay" syle="display:block; width: 300px;"/>
+                }
+                else
+                {
+                    <img src="" id="featuredImageDisplay" syle="display:nome; width: 300px;"/>
+                }
+            </div>
+            
+            <div class="mb-3">
                 <label class="form-label">Featured Image URL</label>
                 <input type="text" class="form-control" id="featuredImageUrl" asp-for="FeaturedImageUrl" />
             </div>
@@ -92,6 +105,37 @@
 @section Scripts
 {
     <script>
-    var editor = new FroalaEditor('#content');
+     var editor = new FroalaEditor('#content', {
+            imageUploadParam: 'formFile',
+            imageUploadURL: '/api/images'
+        });
+    
+    const featuredImageUploadElement = document.getElementById('featuredImageUpload');
+        const featuredImageUrlElement = document.getElementById('featuredImageUrl');
+        const featuredImageDisplayElement = document.getElementById('featuredImageDisplay');
+        
+        async function uploadFeaturedImage(e)
+        {
+            console.log(e.target.files[0]);
+            
+            let data = new FormData();
+            data.append('formFile', e.target.files[0]);
+            
+            await fetch('/api/images', {
+                method: 'POST',
+                headers: {
+                    'Accept': '*/*',
+                    },
+                    body: data
+                    }).then(response => response.json())
+                        .then(result => {
+                            featuredImageUrlElement.value = result.link;
+                            featuredImageDisplayElement.src = result.link;
+                            featuredImageDisplayElement.style.display = 'block';
+                            featuredImageDisplayElement.style.width = '300px';
+                        });
+        }
+        
+        featuredImageUploadElement.addEventListener('change', uploadFeaturedImage);
     </script>
 }
