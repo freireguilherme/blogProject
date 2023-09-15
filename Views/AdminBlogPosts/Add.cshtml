@@ -58,7 +58,7 @@
             </label>
         </div>
         
-       <div class="mb-3">
+        <div class="mb-3">
             <label class="form-label">Tags</label>
             <select class="form-select" aria-label="Default select example" 
                     asp-items="@Model.Tags"
@@ -72,3 +72,10 @@
 
     </form>
 </div>
+
+@section Scripts
+{
+    <script>
+    var editor = new FroalaEditor('#content');
+    </script>
+}
