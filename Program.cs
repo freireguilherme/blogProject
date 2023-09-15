@@ -12,6 +12,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDbConnection
 
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository>();
 
 
 var app = builder.Build();
