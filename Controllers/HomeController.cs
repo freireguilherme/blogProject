@@ -1,6 +1,7 @@
 ﻿using Blog.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Blog.Web.Models.ViewModels;
 using Blog.Web.Repositories;
 
 namespace Blog.Web.Controllers
@@ -27,9 +28,13 @@ namespace Blog.Web.Controllers
             
             //get all tags
             var tags = await _tagRepository.GetAllAsync();
-            
-            //TODO but how to display two sets of data on one view?
-            return View(blogPosts);
+
+            var model = new HomeViewModel
+            {
+                BlogPosts = blogPosts,
+                Tags = tags
+            };
+            return View(model);
         }
 
         public IActionResult Privacy()
