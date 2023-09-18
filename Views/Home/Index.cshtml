@@ -50,7 +50,11 @@
                         </p>
                         <p class="mb-4">@blogPost.ShortDescription</p>
                         
-                        <a class="btn btn-dark" href="#">Read More</a>
+                        <a class="btn btn-dark" 
+                           asp-area=""
+                           asp-controller="Blogs"
+                           asp-action="Index"
+                           asp-route-urlHandle="@blogPost.UrlHandle">Read More</a>
                     </div>
                 }
             }
