@@ -22,6 +22,13 @@ public class BlogPostRepository : IBlogPostRepository
         return await _blogDbContext.BlogPosts.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id);
     }
 
+    public async Task<BlogPost?> GetByUrlHandleAsync(string urlHandle)
+    {
+        return await _blogDbContext.BlogPosts
+            .Include(x => x.Tags)
+            .FirstOrDefaultAsync(x => x.UrlHandle == urlHandle);
+    }
+
     public async Task<BlogPost> AddAsync(BlogPost blogPost)
     {
         await _blogDbContext.AddAsync(blogPost);
