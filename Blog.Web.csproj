@@ -36,4 +36,5 @@
     <_ContentIncludedByDefault Remove="Pages\AdminBlogPosts\List.cshtml" />
   </ItemGroup>
 
+
 </Project>
