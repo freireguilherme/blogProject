@@ -1,12 +1,14 @@
 ﻿using Blog.Web.Models.Domain;
 using Blog.Web.Models.ViewModels;
 using Blog.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Blog.Web.Controllers;
-
-public class AdminBlogPostsController : Controller
+namespace Blog.Web.Controllers
+{   
+    [Authorize(Roles = "Admin")]
+    public class AdminBlogPostsController : Controller
 {
     private readonly ITagRepository _tagRepository;
     private readonly IBlogPostRepository _blogPostRepository;
@@ -171,4 +173,6 @@ public class AdminBlogPostsController : Controller
         return RedirectToAction("Edit", new { id = editBlogPostRequest.Id });
         
     }
+}    
 }
+
