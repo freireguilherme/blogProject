@@ -46,9 +46,13 @@ public class AccountController : Controller
     }
     
     [HttpGet]
-    public IActionResult Login()
+    public IActionResult Login(string ReturnUrl)
     {
-        return View();
+        var model = new LoginViewModel
+        {
+            ReturnUrl = ReturnUrl
+        };
+        return View(model);
     }
 
     [HttpPost]
@@ -56,8 +60,12 @@ public class AccountController : Controller
     {
         var signResult = await _signInManager.PasswordSignInAsync(loginViewModel.Username,
             loginViewModel.Password, false, false);
-        if(signResult != null &&  signResult.Succeeded)
+        if(signResult != null && signResult.Succeeded)
         {
+            if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl))
+            {
+                return Redirect(loginViewModel.ReturnUrl);
+            }
             return RedirectToAction("Index", "Home");
         }
 
