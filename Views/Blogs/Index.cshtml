@@ -26,7 +26,7 @@
                         </a>
                     }
                
-                    <span>@Model.TotalLikes likes</span>
+                    <span id="totalLikes">@Model.TotalLikes</span> likes
                 </div>
                 
                 <div class="mb-3 d-flex">
@@ -54,6 +54,18 @@
 {
     <script>
         const btnLikeElement = document.getElementById('btnLike');
+        const totalLikesElement = document.getElementById('totalLikes');
+        
+        async function getTotalLikes() {
+            await fetch('api/BlogPostLike/@Model.Id/totalLikes', {
+                method: 'GET',
+                headers: {
+                     'Content-Type': 'application/json',
+                     'Accept' : '*/*'
+                }                                         
+            }).then(data => data.json())
+            .then(result => totalLikesElement.innerHTML = result);
+        }
         
         async function addLikeForBlog()
         {
@@ -67,7 +79,11 @@
                     blogPostId: '@Model.Id',
                     userId: '@UserManager.GetUserId(User)'
                 })
-            }).then(console.log('Request finished'))
+            }).then( () => {
+                btnLikeElement.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>';
+                btnLikeElement.removeEventListener('click', addLikeForBlog);
+                getTotalLikes()
+            });
         }
         
         btnLikeElement.addEventListener('click', addLikeForBlog);
