@@ -85,7 +85,7 @@ public class BlogsController : Controller
             };
             
            await _blogPostCommentRepository.AddAsync(domainModel);
-           return RedirectToAction("Index", "Home",
+           return RedirectToAction("Index", "Blogs",
                new { urlHandle = blogDetailsViewModel.UrlHandle });
         }
 
