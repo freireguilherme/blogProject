@@ -68,4 +68,19 @@ public class AdminUsersController : Controller
 
         return View();
     }
+
+    public async Task<IActionResult> Delete(Guid Id)
+    {
+        var user = await _userManager.FindByIdAsync(Id.ToString());
+        if (user is not null)
+        {
+            var identityResult = await _userManager.DeleteAsync(user);
+            if (identityResult is not null && identityResult.Succeeded)
+            {
+                return RedirectToAction("List", "AdminUsers");
+            }
+        }
+
+        return RedirectToAction("List", "AdminUsers");
+    }
 }
