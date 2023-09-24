@@ -25,7 +25,7 @@ public class AuthDbContext : IdentityDbContext
             new IdentityRole
             {
                 Name = "Admin",
-                NormalizedName = "Name",
+                NormalizedName = "admin",
                 Id = adminRoleId,
                 ConcurrencyStamp = adminRoleId
             },
@@ -33,7 +33,7 @@ public class AuthDbContext : IdentityDbContext
             new IdentityRole
             {
                 Name = "SuperAdmin",
-                NormalizedName = "SuperName",
+                NormalizedName = "SuperAdmin",
                 Id = superAdminRoleId,
                 ConcurrencyStamp = superAdminRoleId
             },

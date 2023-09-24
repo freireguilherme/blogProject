@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Web.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20230918192500_Creating Auth Db")]
+    [Migration("20230924155046_Creating Auth Db")]
     partial class CreatingAuthDb
     {
         /// <inheritdoc />
@@ -57,14 +57,14 @@ namespace Blog.Web.Migrations
                             Id = "97447a0e-33a4-4f69-87b8-5985770f31ff",
                             ConcurrencyStamp = "97447a0e-33a4-4f69-87b8-5985770f31ff",
                             Name = "Admin",
-                            NormalizedName = "Name"
+                            NormalizedName = "admin"
                         },
                         new
                         {
                             Id = "7c0cc981-f196-445a-9f22-5a32633c612b",
                             ConcurrencyStamp = "7c0cc981-f196-445a-9f22-5a32633c612b",
                             Name = "SuperAdmin",
-                            NormalizedName = "SuperName"
+                            NormalizedName = "SuperAdmin"
                         },
                         new
                         {
@@ -169,15 +169,15 @@ namespace Blog.Web.Migrations
                         {
                             Id = "d786bb42-c3f3-4718-a874-0ebce583dea9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e8db84d1-16bc-42a1-84c0-7cbcf68ab938",
+                            ConcurrencyStamp = "fdb8276b-67bb-4259-a0d3-a90ea4f1ec6c",
                             Email = "superadmin@blog.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@BLOG.COM",
                             NormalizedUserName = "SUPERADMIN@BLOG.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPuEv9XYZjTirFr6khK+NiIgNhhm6OuiuIm17SuGKPPFgoODEpmfkgZ/PaMNkxgnmw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ7wBECBgiH9Ay1ZB6iQj5oM45zUYPkqDvqqR7YQGPxANmoTbSseq2GHGAlGpB6Rbg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb8cc06a-8b65-4e1e-b56a-2496d9599964",
+                            SecurityStamp = "45200c85-6cc4-45e0-a600-731851fe5667",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@blog.com"
                         });
