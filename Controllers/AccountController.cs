@@ -61,6 +61,11 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel loginViewModel)
     {
+        if (!ModelState.IsValid)
+        {
+            //show errors
+            return View();    
+        }
         var signResult = await _signInManager.PasswordSignInAsync(loginViewModel.Username,
             loginViewModel.Password, false, false);
         if(signResult != null && signResult.Succeeded)
@@ -72,7 +77,6 @@ public class AccountController : Controller
             return RedirectToAction("Index", "Home");
         }
 
-        //show errors
         return View();
     }
 
