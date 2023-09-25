@@ -3,6 +3,7 @@ using Blog.Web.Models.ViewModels;
 using Blog.Web.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Blog.Web.Controllers
 {
@@ -28,6 +29,11 @@ namespace Blog.Web.Controllers
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddTagRequest addTagRequest)
         {
+            ValidateAddTagRequest(addTagRequest);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            } 
             // mapping AddTagRequest to Tag domain model
             var tag = new Tag
             {
@@ -39,6 +45,17 @@ namespace Blog.Web.Controllers
             await _tagRepository.AddAsync(tag);
 
             return RedirectToAction("List");
+        }
+
+        private void ValidateAddTagRequest(AddTagRequest addTagRequest)
+        {
+            if (addTagRequest.Name is not null && addTagRequest.DisplayName is not null)
+            {
+                if (addTagRequest.Name == addTagRequest.DisplayName)
+                {
+                    ModelState.AddModelError("DisplayName", "DisplayName cannot be the same of Name ");
+                }
+            }
         }
 
         [HttpGet]
